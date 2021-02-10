@@ -17,6 +17,14 @@ public class Policy {
             example = "Commercial or Personal")
     private String policyType;
 
+    @Schema(description = "Policy Form Code", 
+            example = "740 or 630 - Datatype Integer")
+    private Integer policyFormCode;
+
+    @Schema(description = "Is policy active", 
+            example = "true/false - Datatype boolean")
+    private boolean activePolicy;
+
     @Schema(description = "Policy effective date", 
             example = "2021/01/09(YYYY/MM/dd)")
     private Date policyEffectiveDate;
@@ -67,6 +75,27 @@ public class Policy {
 
     public void setCustomerDetails(Customer customerDetails) {
         this.customerDetails = customerDetails;
+    }
+
+
+    public Integer getPolicyFormCode() {
+        return this.policyFormCode;
+    }
+
+    public void setPolicyFormCode(Integer policyFormCode) {
+        this.policyFormCode = policyFormCode;
+    }
+
+    public boolean isActivePolicy() {
+        return this.activePolicy;
+    }
+
+    public boolean getActivePolicy() {
+        return this.activePolicy;
+    }
+
+    public void setActivePolicy(boolean activePolicy) {
+        this.activePolicy = activePolicy;
     }
 
     
