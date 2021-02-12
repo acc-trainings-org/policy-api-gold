@@ -34,49 +34,25 @@ public class Policy {
     private Date policyEndDate;
 
     @Schema(description = "Customer Details", 
-            example = "{\"customerId\": \"12345\", \"customerName\": \"Jessica\", \"customerAddress\": \"100 Main Street, New York\"}")
-    private Customer customerDetails;
+            example = "{\"customerId\": \"12345\"}")
+    private Customer customer;
+
 
     public String getPolicyId() {
-        return policyId;
-    }
-
-    public Date getPolicyEndDate() {
-        return policyEndDate;
-    }
-
-    public void setPolicyEndDate(Date policyEndDate) {
-        this.policyEndDate = policyEndDate;
-    }
-
-    public Date getPolicyEffectiveDate() {
-        return policyEffectiveDate;
-    }
-
-    public void setPolicyEffectiveDate(Date policyEffectiveDate) {
-        this.policyEffectiveDate = policyEffectiveDate;
-    }
-
-    public String getPolicyType() {
-        return policyType;
-    }
-
-    public void setPolicyType(String policyType) {
-        this.policyType = policyType;
+        return this.policyId;
     }
 
     public void setPolicyId(String policyId) {
         this.policyId = policyId;
     }
 
-    public Customer getCustomerDetails() {
-        return this.customerDetails;
+    public String getPolicyType() {
+        return this.policyType;
     }
 
-    public void setCustomerDetails(Customer customerDetails) {
-        this.customerDetails = customerDetails;
+    public void setPolicyType(String policyType) {
+        this.policyType = policyType;
     }
-
 
     public Integer getPolicyFormCode() {
         return this.policyFormCode;
@@ -98,6 +74,28 @@ public class Policy {
         this.activePolicy = activePolicy;
     }
 
-    
+    public Date getPolicyEffectiveDate() {
+        return this.policyEffectiveDate;
+    }
+
+    public void setPolicyEffectiveDate(Date policyEffectiveDate) {
+        this.policyEffectiveDate = policyEffectiveDate;
+    }
+
+    public Date getPolicyEndDate() {
+        return this.policyEndDate;
+    }
+
+    public void setPolicyEndDate(Date policyEndDate) {
+        this.policyEndDate = policyEndDate;
+    }
+
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }    
 
 }
