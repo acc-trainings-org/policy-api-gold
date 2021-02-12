@@ -20,6 +20,9 @@ public class PolicyService {
 
     public Policy getPolicy(String policyId) {
         Policy result = policyRepository.findByPolicyId(policyId);
+
+        //TODO: add web-client code for microservice communication
+
         if (result == null) {
             return null;
         }
