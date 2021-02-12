@@ -1,7 +1,5 @@
 package com.acc.training.policyapigold.controller;
 
-import static org.mockito.Mockito.description;
-
 import com.acc.training.policyapigold.model.Policy;
 import com.acc.training.policyapigold.service.PolicyService;
 
