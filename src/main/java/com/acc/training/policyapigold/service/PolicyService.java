@@ -1,7 +1,6 @@
 package com.acc.training.policyapigold.service;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Optional;
 
 import com.acc.training.policyapigold.model.Policy;
 import com.acc.training.policyapigold.repository.IPolicyRepository;
@@ -19,10 +18,10 @@ public class PolicyService {
         return policyRepository.save(policy);
     }
 
-    public List<Policy> getPolicies() {
-        List<Policy> result = policyRepository.findAll();
-        if (result.isEmpty()) {
-            return Collections.emptyList();
+    public Policy getPolicy(String policyId) {
+        Policy result = policyRepository.findByPolicyId(policyId);
+        if (result == null) {
+            return null;
         }
         return result;
     }
