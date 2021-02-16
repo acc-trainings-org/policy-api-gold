@@ -27,10 +27,6 @@ public class PolicyController {
 
     @Autowired
     PolicyService policyService;
-
-    //if property file doesn't have value default is zero
-    @Value("${thread.delay.response:0}")
-    private int delay;
     
     @Operation(summary = "Create Policy")
 	@ApiResponses(value = { 
@@ -61,14 +57,6 @@ public class PolicyController {
 
         if (null == policy) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        
-        //Introduce delay before returnig the response
-        try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
         
         return ResponseEntity.status(HttpStatus.OK).body(policy);
