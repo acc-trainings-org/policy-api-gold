@@ -4,6 +4,8 @@ import com.acc.training.policyapigold.model.Policy;
 import com.acc.training.policyapigold.service.PolicyService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,26 +24,30 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/policy")
+@Configuration
 public class PolicyController {
 
     @Autowired
     PolicyService policyService;
-    
+
+    //if property file doesn't have value default is zero
+    @Value("${thread.delay.response:0}")
+    private int delay;
+
     @Operation(summary = "Create Policy")
-	@ApiResponses(value = { 
-			@ApiResponse(responseCode = "200", description = "policy created successfully", 
-					content = { @Content(mediaType = "application/json", schema = @Schema(implementation = Policy.class)) }),
-			@ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content)})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "policy created successfully", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Policy.class)) }),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content) })
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Policy> createPolicy(@RequestBody Policy body) {
         Policy createdPolicy = policyService.createPolicy(body);
-        if(null == createdPolicy){
+        if (null == createdPolicy) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
         return ResponseEntity.status(HttpStatus.OK).body(createdPolicy);
 
     }
-    
 
     @Operation(summary = "Fetch policy by policyId")
     @ApiResponses(value = {
@@ -51,12 +57,22 @@ public class PolicyController {
             @ApiResponse(responseCode = "404", description = "Customer not found", content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal Server Error", content = @Content) })
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Policy> getPolicy(@Parameter(in = ParameterIn.PATH, description = "find policy", required=true, schema=@Schema()) @PathVariable("id") String policyId) {
+    public ResponseEntity<Policy> getPolicy(
+            @Parameter(in = ParameterIn.PATH, description = "find policy", required = true, schema = @Schema()) @PathVariable("id") String policyId) {
         Policy policy = policyService.getPolicy(policyId);
 
         if (null == policy) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+
+        //Introduce delay before returnig the response
+        try {
+            Thread.sleep(delay);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
         return ResponseEntity.status(HttpStatus.OK).body(policy);
     }
 
