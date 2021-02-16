@@ -65,14 +65,6 @@ public class PolicyController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        //Introduce delay before returnig the response
-        try {
-            Thread.sleep(delay);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
         return ResponseEntity.status(HttpStatus.OK).body(policy);
     }
 
