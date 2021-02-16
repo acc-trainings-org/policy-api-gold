@@ -67,7 +67,7 @@ public class PolicyController {
 
         //Introduce delay before returnig the response
         try {
-            Thread.sleep(delay);
+            Thread.sleep(Integer.parseInt(delay));
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
