@@ -18,6 +18,9 @@ public class PolicyService {
 
     @Autowired
     WebClient customerWebClient;
+    
+    @Value( "${my.path}" )
+    private String myPath;
 
     public Policy createPolicy(Policy policy) {
         return policyRepository.save(policy);
@@ -32,7 +35,7 @@ public class PolicyService {
 
         String customerId = result.getCustomer().getCustomerId();
 
-        Customer customer = customerWebClient.get().uri("/customer/"+customerId).retrieve().bodyToMono(Customer.class).block();
+        Customer customer = customerWebClient.get().uri("/myPath/customer/"+customerId).retrieve().bodyToMono(Customer.class).block();
         if (customer != null){
             result.setCustomer(customer);
         }
